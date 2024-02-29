@@ -65,8 +65,8 @@
     </div>
         </header>
 
-<nav class="navbar navbar-expand-lg navbar-dark">
-        <P class="navbar-brand mx-auto">EMPLOYER ATTENDERS SYSTEM</P>
+<nav class="navbar navbar-expand-lg navbar-dark " >
+        <P class="navbar-brand mx-auto">EMPLOYER AVAILABILITY CHECKING SYSTEM</P>
     </nav>
     <div style="margin-top:-120px">
     <div class="container d-flex justify-content-center align-items-center"
