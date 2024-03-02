@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
 	
 
 	if ($role == 'Employer') {
-		$sql = "SELECT * FROM login WHERE username='$username' AND password='$password'";
+		$sql = "SELECT * FROM employer WHERE username='$username' AND password='$password'";
 		$result = mysqli_query($conn, $sql);
 	
 		// Check if any rows were returned by the query
@@ -25,7 +25,7 @@ if(isset($_POST['submit'])){
 	}
   else if ($role == 'Leader'){ 
 
-	$sql = "SELECT * FROM login WHERE username='$username' AND password='$password'";
+	$sql = "SELECT * FROM leader WHERE username='$username' AND password='$password'";
 	$result1= mysqli_query($conn, $sql);
 	var_dump($result1);
 

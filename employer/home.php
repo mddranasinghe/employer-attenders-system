@@ -1,40 +1,24 @@
 
 <?php
+include ("../db_connection.php");
 session_start();
-$employername=$_SESSION['username']; 
-// Check if date parameter is set
+$employername=$_SESSION['username'];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
     $date = $_POST['date'];
 
-    // Database connection parameters
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "employer_attenders_system";
-
-    // Create connection
-    $conn=mysqli_connect("localhost","root","","employer_attenders_system"); 
-	
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Check if the date already exists in the database
-    $check_query = "SELECT * FROM availability WHERE date='$date'";
+  
+    $check_query = "SELECT * FROM availability WHERE date='$date' and username='$employername'";
     $check_result = $conn->query($check_query);
 
     if ($check_result->num_rows > 0) {
-        // Date exists, so delete it
-        $delete_query = "DELETE FROM availability WHERE date='$date'";
+        $delete_query = "DELETE FROM availability WHERE date='$date' and username='$employername'";
         if ($conn->query($delete_query) === TRUE) {
             echo "Date deleted successfully";
         } else {
             echo "Error deleting date: " . $conn->error;
         }
     } else {
-        // Date doesn't exist, so insert it
         $insert_query = "INSERT INTO availability (username,date) VALUES ('$employername','$date')";
         if ($conn->query($insert_query) === TRUE) {
             echo "Date inserted successfully";
@@ -43,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
         }
     }
 
-    // Close connection
     $conn->close();
 }
 ?>
@@ -165,10 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
         <div class="days" id="days"></div>
     </div>
     
-   <!-- <div id="selectedDates">
-        <h3>Selected Dates:</h3>
-        <ul id="selectedDatesList"></ul>
-    </div>-->
+ <div> </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -179,21 +159,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
             const selectedDatesList = document.getElementById('selectedDatesList');
             let selectedDates = [];
 
-            // Function to update calendar
+           
             function updateCalendar() {
                 const month = parseInt(monthSelect.value);
                 const year = parseInt(yearInput.value);
 
-                // Clear previous days
+        
                 daysContainer.innerHTML = '';
 
-                // Get the first day of the month
                 const firstDay = new Date(year, month, 1).getDay();
 
-                // Get the number of days in the month
+             
                 const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-                // Fill in the days
                 for (let i = 0; i < firstDay; i++) {
                     const dayElement = document.createElement('div');
                     dayElement.classList.add('empty');
@@ -222,15 +200,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
                     selectedDates.push(date);
                 }
 
-                // Update selectedDatesList
-               /* selectedDatesList.innerHTML = '';
-                selectedDates.forEach(date => {
-                    const li = document.createElement('li');
-                    li.textContent = date;
-                    selectedDatesList.appendChild(li);
-                });
-*/
-                // Send date to server using AJAX for database update
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>', true);
                 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
