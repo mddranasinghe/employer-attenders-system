@@ -1,7 +1,7 @@
-
 <?php
-include ("../db_connection.php");
 session_start();
+include ("../db_connection.php");
+
 $employername=$_SESSION['username'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
@@ -29,6 +29,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
 
     $conn->close();
 }
+
+
+// Retrieve inserted dates for the current user
+$date_query = "SELECT date FROM availability WHERE username='$employername'";
+$date_result = $conn->query($date_query);
+
+$inserted_dates = array();
+if ($date_result->num_rows > 0) {
+    while ($row = $date_result->fetch_assoc()) {
+        $inserted_dates[] = $row['date'];
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4b0150;">
 <p style="color:yellow;margin-left:10px;">Employer Name :-<?php echo $_SESSION['username']; ?></p>
-        <P class="navbar-brand mx-auto" style="text-align:center;">EMPLOYER  AVAILABILITY  CHECKING  SYSTEM</P>
+        <P class="navbar-brand mx-auto" style="text-align:center;">EMPLOYER  AVAILABILITY   SYSTEM</P>
         <a class="nav-link active " id="main-nav-a" aria-current="page" href="../logout.php" style="margin-left:50px; color:yellow">LOGOUT</a>
 
     </nav>
@@ -148,8 +161,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['date'])) {
         <div class="days" id="days"></div>
     </div>
     
- <div> </div>
+ <div>
+    
+ <div class="row">
+            <div class="col">
+                <h2>Welcome, <?php echo $employername; ?></h2>
+                <h3>Inserted Dates:</h3>
+                <ul>
+                    <?php
+                    // Display inserted dates
+                    foreach ($inserted_dates as $date) {
+                        echo "<li>$date</li>";
+                    }
+                    ?>
+                </ul>
+            </div>
+            <div class="col">
+                <!-- Calendar goes here -->
+            </div>
+        </div>
 
+
+
+</div>
+ 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const calendar = document.getElementById('calendar');
