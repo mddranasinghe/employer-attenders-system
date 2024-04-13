@@ -116,9 +116,10 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4b0150;">
-<p style="color:yellow;margin-left:10px;">Leader Name :-<?php echo $_SESSION['username']; ?></p>
+<p style="color:yellow;margin-left:10px;">Leader Name : <?php echo $_SESSION['username']; ?></p>
         <P class="navbar-brand mx-auto" style="text-align:center;">EMPLOYER   AVAILABILITY  SYSTEM</P>
-        <a class="nav-link active " id="main-nav-a" aria-current="page" href="../logout.php" style="margin-left:50px; color:yellow">LOGOUT</a> </nav>
+        <a href="reg.php"  class="nav-link active " style="margin-left:50px; color:yellow">Employer Registation</a>
+        <a class="nav-link active "  aria-current="page" href="../logout.php" style="margin-left:50px; color:yellow">Logout</a> </nav>
 
     <div class="left-container">
         <div class="container">
@@ -147,14 +148,12 @@
             <tr>
         </table>
         <?php
-        // Check if the form is submitted
+       
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['employer_name'])) {
-            // Fetch availability for the specified employer
             $employer_name = $_GET['employer_name'];
             $availability_query = "SELECT date FROM availability WHERE username = '$employer_name'";
             $availability_result = mysqli_query($conn, $availability_query);
             if (mysqli_num_rows($availability_result) > 0) {
-                // Display availability
                 echo "<div class='result-container'>";
                 echo "<ul class='result-list'>";
                 while ($row = mysqli_fetch_assoc($availability_result)) {
@@ -167,7 +166,7 @@
                 echo "<p class='alert alert-warning'>No availability found for $employer_name</p>";
                 echo "</div>";
             }
-            // Close connection
+            
             mysqli_close($conn);
         }
         ?>
@@ -199,14 +198,14 @@
             <tr>
         </table>
         <?php
-        // Check if the form is submitted
+    
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['availability_date'])) {
-            // Fetch employers available on the specified date
+            
             $availability_date = $_GET['availability_date'];
             $availability_query = "SELECT username FROM availability WHERE date = '$availability_date'";
             $availability_result = mysqli_query($conn, $availability_query);
             if (mysqli_num_rows($availability_result) > 0) {
-                // Display employers available on the specified date
+           
                 echo "<div class='result-container'>";
                 echo "<ul class='result-list'>";
                 while ($row = mysqli_fetch_assoc($availability_result)) {
@@ -219,7 +218,7 @@
                 echo "<p class='alert alert-warning'>No employers available on $availability_date</p>";
                 echo "</div>";
             }
-            // Close connection
+          
             mysqli_close($conn);
         }
         ?>

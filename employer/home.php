@@ -67,6 +67,7 @@ if ($date_result->num_rows > 0) {
             border: 1px solid #ccc;
             border-radius: 5px;
             background-color: #f9f9f9;
+          
         }
 
         .calendar h2 {
@@ -120,11 +121,16 @@ if ($date_result->num_rows > 0) {
         .calendar .days div:hover {
             background-color: #ddd;
         }
+        .row{
+        
+          margin:0 auto;
+           
+       }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4b0150;">
-<p style="color:yellow;margin-left:10px;">Employer Name :-<?php echo $_SESSION['username']; ?></p>
+<p style="color:yellow;margin-left:10px;">Employer Name - <?php echo $_SESSION['username']; ?></p>
         <P class="navbar-brand mx-auto" style="text-align:center;">EMPLOYER  AVAILABILITY   SYSTEM</P>
         <a class="nav-link active " id="main-nav-a" aria-current="page" href="../logout.php" style="margin-left:50px; color:yellow">LOGOUT</a>
 
@@ -163,27 +169,33 @@ if ($date_result->num_rows > 0) {
     
  <div>
     
- <div class="row">
-            <div class="col">
-                <h2>Welcome, <?php echo $employername; ?></h2>
-                <h3>Inserted Dates:</h3>
-                <ul>
-                    <?php
-                    // Display inserted dates
-                    foreach ($inserted_dates as $date) {
-                        echo "<li>$date</li>";
-                    }
-                    ?>
-                </ul>
-            </div>
-            <div class="col">
-                <!-- Calendar goes here -->
-            </div>
-        </div>
+ <table class="table" style="width:30%; margin-left: auto; margin-right: auto;">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Inserted Dates - <?php echo $employername; ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach ($inserted_dates as $index => $date) {
+            echo "<tr>";
+            echo "<th scope='row'>" . ($index + 1) . "</th>"; 
+            echo "<td>$date</td>"; 
+           
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+</table>
 
 
 
-</div>
+
+    </tbody>
+</table>
+            
+
+
  
     <script>
         document.addEventListener('DOMContentLoaded', function() {
