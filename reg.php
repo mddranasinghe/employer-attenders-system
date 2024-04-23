@@ -1,4 +1,4 @@
-<?php session_start(); include ("../db_connection.php");?>
+<?php session_start(); include ("db_connection.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +38,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4b0150;">
 <p style="color:yellow;margin-left:10px;">Leader Name : <?php echo $_SESSION['username']; ?></p>
         <P class="navbar-brand mx-auto" style="text-align:center;">EMPLOYER   AVAILABILITY  SYSTEM</P>
-        <a href="home.php"  class="nav-link active " style="margin-left:50px; color:yellow">Dashbord</a>
-        <a class="nav-link active "  aria-current="page" href="../logout.php" style="margin-left:50px; color:yellow">Logout</a> </nav>
+        <a href="homeAdmin.php"  class="nav-link active " style="margin-left:50px; color:yellow">Dashbord</a>
+        <a class="nav-link active "  aria-current="page" href="logout.php" style="margin-left:50px; color:yellow">Logout</a> </nav>
 <div class="container">
     <h2 class="mb-4">Employer Registration Form</h2>
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">

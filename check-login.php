@@ -18,7 +18,7 @@ if(isset($_POST['submit'])){
 		// Check if any rows were returned by the query
 		if (mysqli_num_rows($result) > 0) {
 			$_SESSION['username'] = $username;
-			header("Location: employer/home.php");
+			header("Location: homeEmp.php");
 		} else {
 			echo "Failed to login.";
 		}
@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
 	if(mysqli_num_rows($result1)>0){
 		
 		$_SESSION['username'] =$username ;
-		header("Location: leader/home.php");
+		header("Location:homeAdmin.php");
 	
 	}else{
 		echo "Failed to login.";

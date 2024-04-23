@@ -1,4 +1,4 @@
-<?php  session_start();include ("../db_connection.php");?>
+<?php  session_start();include ("db_connection.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,20 +118,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4b0150;">
 <p style="color:yellow;margin-left:10px;">Leader Name : <?php echo $_SESSION['username']; ?></p>
         <P class="navbar-brand mx-auto" style="text-align:center;">EMPLOYER   AVAILABILITY  SYSTEM</P>
+        <a href="empmanage.php"  class="nav-link active " style="margin-left:50px; color:yellow">Employer Manage</a>
         <a href="reg.php"  class="nav-link active " style="margin-left:50px; color:yellow">Employer Registation</a>
-        <a class="nav-link active "  aria-current="page" href="../logout.php" style="margin-left:50px; color:yellow">Logout</a> </nav>
+        <a class="nav-link active "  aria-current="page" href="logout.php" style="margin-left:50px; color:yellow">Logout</a> </nav>
 
     <div class="left-container">
         <div class="container">
             <div class="col-md-6">
                 <form method="GET">
                     <div class="form-group">
-                        <label for="employer_name">Enter Employer Name:</label>
+                        <label for="employer_name">Enter Employer Name</label>
                         <table>
                             <tr>
                                 <td>
                                     <input type="text" id="employer_name" name="employer_name" class="form-control"
-                                     required>
+                                     required placeholder="ex-:Johan">
                                 </td>
                                 <td>
                                     <button type="submit" class="btn">Search</button>
@@ -176,7 +177,7 @@
             <div class="col-md-6">
                 <form method="GET">
                     <div class="form-group">
-                        <label for="availability_date">Enter Date (YYYY-MM-DD):</label>
+                        <label for="availability_date">Enter Date (YYYY-MM-DD)</label>
                         <table>
                             <tr>
                                 <td>

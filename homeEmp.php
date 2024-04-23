@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("../db_connection.php");
+include ("db_connection.php");
 
 $employername=$_SESSION['username'];
 
@@ -132,7 +132,7 @@ if ($date_result->num_rows > 0) {
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4b0150;">
 <p style="color:yellow;margin-left:10px;">Employer Name - <?php echo $_SESSION['username']; ?></p>
         <P class="navbar-brand mx-auto" style="text-align:center;">EMPLOYER  AVAILABILITY   SYSTEM</P>
-        <a class="nav-link active " id="main-nav-a" aria-current="page" href="../logout.php" style="margin-left:50px; color:yellow">LOGOUT</a>
+        <a class="nav-link active " id="main-nav-a" aria-current="page" href="logout.php" style="margin-left:50px; color:yellow">LOGOUT</a>
 
     </nav>
 
@@ -169,10 +169,10 @@ if ($date_result->num_rows > 0) {
     
  <div>
     
- <table class="table" style="width:30%; margin-left: auto; margin-right: auto;">
+ <table class="table table-striped" style="width:30%; margin-left: auto; margin-right: auto;">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">Inserted Dates - <?php echo $employername; ?></th>
+            <th scope="col"><h4><b>Inserted Dates - <?php echo $employername; ?></b></h4></th>
         </tr>
     </thead>
     <tbody>
